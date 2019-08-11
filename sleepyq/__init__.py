@@ -291,6 +291,29 @@ class Sleepyq:
         r=self.__make_request('/bed/'+bedId+'/pump/forceIdle', "put")
         return True
 
+    def set_privacy(self, bedId, on):
+        #
+        # on True or False
+        #
+        if on == True:
+            mode = 'on'
+        elif on == False:
+            mode = "off"
+        else:
+            raise ValueError("On must be one of the following: True or False")
+        r=self.__make_request('/bed/'+bedId+'/pauseMode?mode='+mode, "put")
+        return True
+
+    def get_privacy(self, bedId):
+        r=self.__make_request('/bed/'+bedId+'/pauseMode')
+        mode = r.json()["pauseMode"]
+        if mode == 'on':
+            return True
+        elif mode == 'off':
+            return False
+        else:
+            raise ValueError("Unexpected privacy mode: "+mode)
+
     def foundation_status(self, bedId):
         r=self.__make_request('/bed/'+bedId+'/foundation/status')
         return Status(r.json())

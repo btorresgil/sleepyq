@@ -29,6 +29,7 @@ To get started using the library, here's the full usage:
     >>> pprint(client.get_favsleepnumber(bedNumber))
     >>> client.stop_motion(bedNumber, side)
     >>> client.stop_pump(bedNumber)
+    >>> client.set_privacy(bedNumber, True, side)
     >>> pprint(client.foundation_status(bedNumber))
     >>> pprint(client.foundation_system(bedNumber))
     >>> pprint(client.foundation_features(bedNumber))
