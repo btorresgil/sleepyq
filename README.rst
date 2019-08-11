@@ -23,6 +23,7 @@ To get started using the library, here's the full usage:
     >>> client.set_lights(bedNumber, lightNumber, setting)
     >>> pprint(client.get_lights(bedNumber, lightNumber))
     >>> client.preset(bedNumber, preset, side, slowSpeed=False)
+    >>> client.adjust(bedNumber, actuator, position, side, slowSpeed=False)
     >>> client.set_sleepnumber(bedNumber, side, sleepnumber)
     >>> client.set_favsleepnumber(bedNumber, side, sleepnumber)
     >>> pprint(client.get_favsleepnumber(bedNumber))

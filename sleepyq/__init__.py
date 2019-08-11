@@ -203,6 +203,31 @@ class Sleepyq:
         else:
             raise ValueError("Invalid preset")
 
+    def adjust(self, bedId, actuator, position, side, slowSpeed=False):
+        #
+        # actuator  "H" or "F"
+        # position 0-100
+        # side "R" or "L"
+        # slowSpeed False=fast, True=slow
+        #
+        if 0 > position or position > 100 :
+            raise ValueError("Invalid position, must be between 0 and 100")
+        if side.lower() in ('r', 'right'):
+            side = "R"
+        elif side.lower() in ('l', 'left'):
+            side = "L"
+        else:
+            raise ValueError("Side mut be one of the following: left, right, L or R")
+        if actuator.lower() in ('h', 'head'):
+            actuator = "H"
+        elif actuator.lower() in ('f', 'foot'):
+            actuator = "F"
+        else:
+            raise ValueError("actuator mut be one of the following: head, foot, H or F")
+        data = {'actuator':actuator,'position':position,'side':side,'speed':1 if slowSpeed else 0}
+        r=self.__make_request('/bed/'+bedId+'/foundation/adjustment/micro', "put", data)
+        return True
+
     def set_sleepnumber(self, bedId, side, setting):
         #
         # side "R" or "L"
